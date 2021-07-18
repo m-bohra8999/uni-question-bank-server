@@ -5,6 +5,7 @@ const Subject = require('../models/subject')
 
 router.get('/:branch/:yearWithSem', async(req,res) => {
   try{
+    console.log(req.params)
     const yearWithSem = req.params.yearWithSem;
     const branch = req.params.branch;
     let bName;

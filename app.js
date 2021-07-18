@@ -6,10 +6,6 @@ const cors        = require('cors');
 const app         = express();
 const Paper = require('./models/paper')
 
-
-
-
-
 app.use(express.json())
 app.use('/papers', paperRouter)
 app.use('/branches', branchRouter)

@@ -27,8 +27,14 @@ router.get('/:id', async(req,res) => {
 
 router.post('/', upload.single('pdf') ,async(req,res,next) => {
     console.log('reqBody: ', req.body)
+    let bName = req.body.branchName;
+    if(bName === 'cse'){
+        bName = 'Computer Science and Engineering';
+    } else if(bName === 'ec') {
+        bName = 'Electronics and Communication Engineering';
+    }
     const paper = new Paper({
-      branchName: req.body.branchName,
+      branchName: bName,
       session: req.body.session,
       subject: req.body.subject,
       yearWithSem: req.body.yearWithSem
@@ -50,8 +56,14 @@ router.post('/', upload.single('pdf') ,async(req,res,next) => {
 
 router.patch('/:id',async(req,res)=> {
     try{
+        let bName = req.body.branchName;
+        if(bName === 'cse'){
+            bName = 'Computer Science and Engineering';
+        } else if(bName === 'ec') {
+            bName = 'Electronics and Communication Engineering';
+        }
         const paper = await Paper.findById(req.params.id) 
-        paper.branchName = req.body.branchName
+        paper.branchName = bName
         paper.session = req.body.session
         paper.subject = req.body.subject
         paper.yearWithSem = req.body.yearWithSem
