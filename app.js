@@ -32,8 +32,6 @@ app.post('/query', async(req,res,next) => {
             bName = 'Electronics And Communication Engineering'
             break;
         }
-        console.log('req.body', req.body)
-        console.log(bName);
         let a1;
         if(!req.body.session && !req.body.subject){
             a1 =  await Paper.find({

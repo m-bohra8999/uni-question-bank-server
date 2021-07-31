@@ -26,7 +26,6 @@ router.get('/:id', async(req,res) => {
 
 
 router.post('/', upload.single('pdf') ,async(req,res,next) => {
-    console.log('reqBody: ', req.body)
     let bName = req.body.branchName;
     if(bName === 'cse'){
         bName = 'Computer Science and Engineering';
@@ -42,7 +41,6 @@ router.post('/', upload.single('pdf') ,async(req,res,next) => {
 
     try{
         if(req.file) {
-            console.log('file: ', req.file);
             paper.pdf = req.file.path
         }
         const a1 =  await paper.save()
@@ -61,6 +59,9 @@ router.patch('/:id',async(req,res)=> {
             bName = 'Computer Science and Engineering';
         } else if(bName === 'ec') {
             bName = 'Electronics and Communication Engineering';
+        }
+        else {
+            bName = req.body.branchName;
         }
         const paper = await Paper.findById(req.params.id) 
         paper.branchName = bName
@@ -85,7 +86,6 @@ router.delete('/:id',async(req,res)=> {
                 console.error(err)
                 return
             }
-        //file removed
         })
 
         const a1 = await paper.remove()
